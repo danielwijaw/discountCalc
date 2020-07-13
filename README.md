@@ -4,9 +4,9 @@
 <p><b>To Do List Do Magic</b><p>
 <ol>
     <li>Clone this repo</li>
-    <pre>git clone https://github.com/danielwijaw/discountCalculator</pre>
+    <pre>git clone https://github.com/danielwijaw/discountCalc</pre>
     <li>Open directory apps</li>
-    <pre>cd discountCalculator</pre>
+    <pre>cd discountCalc</pre>
     <li>Install Node Modules</li>
     <pre>npm install</pre>
     <li>Edit .env and setup database</li>
@@ -16,4 +16,3 @@
     <li>After created database then run this command to migrating table</li>
     <pre>node node_modules/db-migrate/bin/db-migrate up</pre>
 </ol>
-<p># Noted : Input format is time in ​12​-hour clock format (i.e.​hh:mm:ssAM​  orhh:mm:ssPM​)</p>

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const item = require("../controller/item")
+const itemBackend = require("../controller/itemBackend")
 
-router.get('/', item.index);
+router.get('/', itemBackend.index);
 
 module.exports = router;
