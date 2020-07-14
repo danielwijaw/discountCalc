@@ -15,4 +15,6 @@
     <pre>node node_modules/db-migrate/bin/db-migrate db:create discountCalc --env first</pre>
     <li>After created database then run this command to migrating table</li>
     <pre>node node_modules/db-migrate/bin/db-migrate up</pre>
+    <li>Run the apps</li>
+    <pre>npm start</pre>
 </ol>
