@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    br
+    div(class="container")
+        a(href=`${base_url}/viewbill`)
+            button(type='button' class='btn btn-primary btn-md') View List Item
+        div(class="col-md-12")
+            br
+            table(class="table display" id="table")
+                thead
+                    tr
+                        th Nama Item
+                        th Jenis Barang
+                        th Diskon
+                        th Harga
+                        th List Bill
+    script(type='text/javascript').
+        $('#table').DataTable({
+            "ajax": "#{base_url}/backend/item?format=datatablesbill"
+        });
+        function addBill(id){
+            var checkBox = document.getElementById(id);
+            if (checkBox.checked == true){
+                $.ajax({
+                    url: "#{base_url}/backend/bill/"+id,
+                    type: 'POST',
+                    data: JSON.stringify({ item_id: id, checked: 'true' }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("Data Insert");
+                    },
+                    failure: function(errMsg) {
+                        alert(errMsg);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: "#{base_url}/backend/bill/"+id,
+                    type: 'POST',
+                    data: JSON.stringify({ item_id: id, checked: 'false' }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("Data Insert");
+                    },
+                    failure: function(errMsg) {
+                        alert(errMsg);
+                    }
+                });
+            }
+        }

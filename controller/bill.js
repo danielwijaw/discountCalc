@@ -6,16 +6,10 @@ const baseUrl = Config.base_url();
 
 module.exports = {
     index: function(req, res, next) {
-        res.render('index', { title: 'Discount Calculator', base_url: baseUrl });
-    },
-    navbar: function(req, res, next) {
-        res.render('navbar', { title: 'DiscountCalc', base_url: baseUrl });
-    },
-    viewPage: function(req, res, next) {
-        res.render('item', { base_url: baseUrl  });
+        res.render('billItem', { base_url: baseUrl  });
     },
     viewAll: function(req, yes){
-        const url = localhost+'/backend/item';
+        const url = localhost+'/backend/bill';
 
         http.get(url, function(res){
 

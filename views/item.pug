@@ -1,0 +1,106 @@
+extends layout
+
+block content
+    br
+    div(class="container")
+        button(type='button' class='btn btn-primary btn-md' onclick="createItem()" data-toggle="modal" data-target="#modalItem") Create Item
+        |&nbsp;
+        a(href=`${base_url}/view`)
+            button(type='button' class='btn btn-primary btn-md') View All Item
+        div(class="col-md-12")
+            br
+            table(class="table display" id="table")
+                thead
+                    tr
+                        th Nama Item
+                        th Kode Diskon
+                        th Harga
+                        th &nbsp;
+
+    div(class="modal fade" tabindex="-1" role="dialog" id="modalItem")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h5(class="modal-title" id="modalLabel") Modal Label
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                div(class="modal-body")
+                    div(id="dataItemHere")
+    script(type='text/javascript').
+        $('#table').DataTable({
+            "ajax": "#{base_url}/backend/item?format=datatables"
+        });
+        function createItem(){
+            $("#modalLabel").html("Created New Data Item")
+            $("#dataItemHere").html(`
+                <form action="#{base_url}/backend/item" method="POST">
+                    <div class="form-group">
+                        <label>Nama Item</label>
+                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama Item" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Jenis Diskon</label>
+                        <select class="form-control" name="discount_code" id="jenisDiskon" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <input name="price"  onkeyup="this.value=this.value.replace(/[^\\d]/,'')" type="number" class="form-control" placeholder="Masukan Harga Barang" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Created Item</button>
+                </form>
+            `)
+            $.get("#{base_url}/backend/item/diskon", function( data ) {
+                $("#jenisDiskon").html("")
+                var option = "";
+                for(var key in data) {
+                    option += "<option value=" + key  + ">" +data[key] + "</option>"
+                }
+                $("#jenisDiskon").html(option)
+            });
+        }
+        function updateItem(id){
+            $("#modalLabel").html("Updated Item")
+            $("#dataItemHere").html(`
+                <form action="#{base_url}/backend/item/`+id+`" method="POST">
+                    <div class="form-group">
+                        <label>Nama Item</label>
+                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama Item" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Jenis Diskon</label>
+                        <select class="form-control" name="discount_code" id="jenisDiskon" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <input name="price"  onkeyup="this.value=this.value.replace(/[^\\d]/,'')" type="number" class="form-control" placeholder="Masukan Harga Barang" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Item</button>
+                </form>
+            `)
+            $.get("#{base_url}/backend/item/diskon", function( data ) {
+                var option = "";
+                for(var key in data) {
+                    option += "<option value=" + key  + ">" +data[key] + "</option>"
+                }
+                $("#jenisDiskon").html(option)
+            });
+            $.get("#{base_url}/backend/item/"+id, function( data ) {
+                $("input[name=name]").val(data.name)
+                $("input[name=price]").val(data.price)
+                $("select[name=discount_code]").val(data.discount_code)
+            });
+        }
+        function deletedItem(id){
+            var confirmation = confirm("Are you sure to deleted Item permanently ?");
+            if (confirmation == true) {
+                $.ajax({
+                    url: "#{base_url}/backend/item/"+id,
+                    type: 'DELETE',
+                    success: function(result) {
+                        location.reload();
+                    }
+                });
+            }
+        }

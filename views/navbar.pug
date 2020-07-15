@@ -1,12 +1,10 @@
 nav(class='navbar navbar-expand-lg navbar-light bg-light')
-    a(class='navbar-brand' href=`${base_url}`) Smart City
+    a(class='navbar-brand' href=`${base_url}`)= title
     div(class='collapse navbar-collapse')
-    ul(class='navbar-nav mr-auto')
-        li(class='nav-item.active')
-        a(href=`${base_url}` class='nav-link') Home
-        li(class='nav-item')
-        a(href=`${base_url}/item` class='nav-link') Item
-        li(class='nav-item')
-        a(href='/parking' class='nav-link') Parking
-        li(class='nav-item')
-        a(href='/view' class='nav-link') View
+        ul(class='navbar-nav mr-auto')
+            li(class='nav-item.active')
+                a(href=`${base_url}` class='nav-link') Home
+            li(class='nav-item')
+                a(href=`${base_url}/item` class='nav-link') Item
+            li(class='nav-item')
+                a(href=`${base_url}/bill` class='nav-link') Bill
