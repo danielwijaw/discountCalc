@@ -1,8 +1,30 @@
 extends layout
 
 block content
-  h1= title
-  p <b>Discount Codes</b>
+  p <h2>Documentation Apps</h2>
+  p
+    ol
+      li Install Dependency and Migrating Database (Install Dependency and Migrating)
+      li Create Item in Menu <b>Master Data Item</b>
+      li Check <b>List Bill</b> in Menu <b>Bill</b> to Add Item into Bill
+  p <h2>Install Dependency and Migrating Database</h2>
+  p
+    ol
+      li Clone this repo
+        pre git clone <a href="https://github.com/danielwijaw/discountCalc">https://github.com/danielwijaw/discountCalc</a>
+      li Open directory apps
+        pre cd discountCalc
+      li Install Node Modules
+        pre npm install
+      li Edit .env and setup database
+        pre nano .env
+      li After setup configuration in .env then run this command to create database
+        pre node node_modules/db-migrate/bin/db-migrate db:create discountCalc --env first
+      li After created database then run this command to migrating table
+        pre node node_modules/db-migrate/bin/db-migrate up
+      li Run the apps
+        pre npm start
+  p <h2>Discount Codes</h2>
   p
     b Fashion
     ul
